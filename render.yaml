@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: x-cash-update
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DB_PATH
+        value: /var/data/x_cash_update.sqlite
+    disk:
+      name: xcu-data
+      mountPath: /var/data
+      sizeGB: 1
